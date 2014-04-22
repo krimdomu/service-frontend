@@ -1,0 +1,10 @@
+# temporary directories
+tmp
+
+# library directory, all modules should be in their own repository
+lib
+
+# editor tmp files
+.*.sw*
+*~
+*.bak
