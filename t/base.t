@@ -23,7 +23,7 @@ test {
   $t->has_content("/etc/passwd", qr{root:x:0:}ms);
 
   run "ls -l";
-  $t->test_ok($? == 0, "ls -l returns success.");
+  $t->ok($? == 0, "ls -l returns success.");
 
   $t->finish;
 };

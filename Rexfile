@@ -1,5 +1,5 @@
 # load Rex modules with a featureset for version 0.45
-use Rex -feature => '0.45';
+use Rex -feature => ['0.45'];
 
 # load the Rex CMDB
 use Rex::CMDB;
@@ -15,9 +15,17 @@ groups_file "server.ini";
 
 # configure the CMDB
 # we're using the default YAML CMDB
+# but we're defining some special lookup rules
 set cmdb => {
   type => "YAML",
-  path => "./cmdb",
+  path => [
+    "cmdb/{operatingsystem}/{hostname}.yml",
+    "cmdb/{operatingsystem}/default.yml",
+    "cmdb/{environment}/{hostname}.yml",
+    "cmdb/{environment}/default.yml",
+    "cmdb/{hostname}.yml",
+    "cmdb/default.yml",
+  ],
 };
 
 # include some Rex module
@@ -39,4 +47,5 @@ task setup => make {
   Rex::NTP::Base::setup();
 };
 
-1; # the last line of a Rexfile
+# the last line of a Rexfile
+1;
