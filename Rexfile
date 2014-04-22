@@ -4,6 +4,9 @@ use Rex -feature => '0.45';
 # load the Rex CMDB
 use Rex::CMDB;
 
+# load Rex integration tests
+use Rex::Test;
+
 # load the function to read server groups from an ini file
 use Rex::Group::Lookup::INI;
 
@@ -36,4 +39,4 @@ task setup => make {
   Rex::NTP::Base::setup();
 };
 
-1;    # the last line of a Rexfile
+1; # the last line of a Rexfile
