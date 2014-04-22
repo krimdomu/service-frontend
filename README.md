@@ -163,13 +163,14 @@ The main task.  If you don't define the servers (or groups) in the task definiti
 
 
 ```perl
-task "setup", group => "frontend",  make {
+task "setup", group => "frontend",
 ```
 
 It is also possible to define the server or group to connect to.
 
 
 ```perl
+make {
   # run setup() task of Rex::OS::Base module
   Rex::OS::Base::setup();
 
