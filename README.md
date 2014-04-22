@@ -64,6 +64,8 @@ With this in mind it is easy to have multiple environments with the same service
 
 Every service has its own *Rexfile*.
 
+### Load all required modules
+
 ```perl
 use Rex -feature => ['0.45'];
 use Rex::CMDB;
@@ -79,12 +81,14 @@ These lines loads all required modules.
 * Line *4* Load the function to read Rex groups from ini files.
 
 
+### Load the server groups
+
 ```perl
 groups_file "server.ini";
 ```
 Load all server groups from the file *server.ini*.
 
-
+### Configure the CMDB
 
 ```perl
 set cmdb => {
@@ -138,6 +142,8 @@ It is possible to use every **Rex::Hardware** variable inside the path.
 * eth0_netmask
 
 
+### Include all required Rex modules
+
 ```perl
 include qw/
   Rex::OS::Base
@@ -147,6 +153,7 @@ include qw/
 
 Include all needed Rex modules. With **include** all the tasks inside these modules won't get displayed with *rex -T*.
 
+### The main task
 
 ```perl
 task setup => make {
@@ -175,6 +182,7 @@ It is also possible to define the server or group to connect to.
 Inside the task we just call the tasks from the modules we have included above. All tasks can be called as a normal perl function, as long as the taskname doesn't conflict with other perl functions.
 
 
+### The last line
 
 ```perl
 # the last line of a Rexfile
