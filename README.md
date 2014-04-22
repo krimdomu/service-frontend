@@ -255,3 +255,13 @@ Run the tests. You can also use normal rex functions here.
 At the end finish the tests with ```$t->finish;```.
 
 You can now run the tests with ```rex Test:run```.
+
+## Getting the code
+
+Now, when you all have commit to your git repository you can use the *rexify* command to download them to (for example) a central deployment server.
+
+```
+rexify --init=https://bitbucket.org/jfried/service-frontend.git
+```
+
+This will download everything into the folder *service-frontend*. The command also takes care of all dependencies and download them also into the *lib* folder.
