@@ -193,3 +193,63 @@ The last line of a Rexfile is normaly a true value. This is not always needed, b
 
 
 ## Test before ship
+
+Since version 0.46 Rex comes with a integration test suite. It is based on *Rex::Box* and currently supports VirtualBox. With it you can spawn local Virtual Box VMs and test your tasks on it.
+
+The tests are stored in the **t** directory.
+
+### Example t/base.t test file
+
+```perl
+use Rex::Test::Base;
+use Rex -base;
+```
+
+Load the *Rex::Test::Base* framework and the Rex basic commands.
+
+```perl
+test {
+  my $t = shift;
+
+  $t->name("ubuntu test");
+```
+Create a new test named **ubuntu test**. For every test Rex will create a new vm.
+
+```perl
+  $t->base_vm("http://box.rexify.org/box/ubuntu-server-12.10-amd64.ova");
+  $t->vm_auth(user => "root", password => "box");
+```
+
+Define the url where to download the base VM image and the authentication.
+
+```perl
+  $t->run_task("setup");
+```
+
+Define which task to run on the VM.
+
+```perl
+  $t->has_package("vim");
+  $t->has_package("ntp");
+  $t->has_package("unzip");
+
+  $t->has_file("/etc/ntp.conf");
+
+  $t->has_service_running("ntp");
+
+  $t->has_content("/etc/passwd", qr{root:x:0:}ms);
+
+  run "ls -l";
+  $t->ok($? == 0, "ls -l returns success.");
+```
+Run the tests. You can also use normal rex functions here.
+
+
+```perl
+  $t->finish;
+};
+
+1;
+```
+
+At the end finish the tests with ```$t->finish;```.
