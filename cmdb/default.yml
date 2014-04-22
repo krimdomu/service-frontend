@@ -1,0 +1,7 @@
+Rex::NTP::Base::ntp_server:
+  - pool.ntp.org
+
+# Rex::OS::Base::packages:
+#   - top
+#   - nc
+#   - vim

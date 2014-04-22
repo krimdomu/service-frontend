@@ -1,0 +1,14 @@
+Name: Frontend Service
+Description: The frontend service
+Author: jan gehring <jan.gehring@gmail.com>
+License: Apache 2.0
+Requires:
+  Rex::Ext::ParamLookup:
+    git: https://github.com/krimdomu/rex-ext-paramlookup.git
+    branch: master
+  Rex::NTP::Base:
+    git: https://github.com/krimdomu/rex-ext-ntp-base.git
+    branch: master
+  Rex::OS::Base:
+    git: https://github.com/krimdomu/rex-os-base.git
+    branch: master
