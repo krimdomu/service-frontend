@@ -156,7 +156,7 @@ Include all needed Rex modules. With **include** all the tasks inside these modu
 ### The main task
 
 ```perl
-task setup => make {
+task setup =>
 ```
 
 The main task.  If you don't define the servers (or groups) in the task definition you can use the cli paramter *-G* or *-H*.
