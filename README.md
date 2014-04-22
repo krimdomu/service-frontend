@@ -253,3 +253,5 @@ Run the tests. You can also use normal rex functions here.
 ```
 
 At the end finish the tests with ```$t->finish;```.
+
+You can now run the tests with ```rex Test:run```.
