@@ -64,13 +64,6 @@ With this in mind it is easy to have multiple environments with the same service
 
 Every service has its own *Rexfile*.
 
-These lines loads all required modules.
-
-* Line *1* Load the basic Rex functions and enable all features from version 0.45 and above.
-* Line *2* Load the CMDB functions.
-* Line *3* Load the Rex::Test suite. With this you can test your Rex code with local virtual box virtual machines.
-* Line *4* Load the function to read Rex groups from ini files.
-
 ```perl
 use Rex -feature => ['0.45'];
 use Rex::CMDB;
@@ -78,10 +71,33 @@ use Rex::Test;
 use Rex::Group::Lookup::INI;
 ```
 
-Load all server groups from the file *server.ini*.
+These lines loads all required modules.
+
+* Line *1* Load the basic Rex functions and enable all features from version 0.45 and above.
+* Line *2* Load the CMDB functions.
+* Line *3* Load the Rex::Test suite. With this you can test your Rex code with local virtual box virtual machines.
+* Line *4* Load the function to read Rex groups from ini files.
+
 
 ```perl
 groups_file "server.ini";
+```
+Load all server groups from the file *server.ini*.
+
+
+
+```perl
+set cmdb => {
+  type => "YAML",
+  path => [
+    "cmdb/{operatingsystem}/{hostname}.yml",
+    "cmdb/{operatingsystem}/default.yml",
+    "cmdb/{environment}/{hostname}.yml",
+    "cmdb/{environment}/default.yml",
+    "cmdb/{hostname}.yml",
+    "cmdb/default.yml",
+  ],
+};
 ```
 
 Configure the CMDB. Here we define a custom search path. This will tell the CMDB to lookup the keys in the following order:
@@ -121,21 +137,6 @@ It is possible to use every **Rex::Hardware** variable inside the path.
 * eth0_broadcast
 * eth0_netmask
 
-```perl
-set cmdb => {
-  type => "YAML",
-  path => [
-    "cmdb/{operatingsystem}/{hostname}.yml",
-    "cmdb/{operatingsystem}/default.yml",
-    "cmdb/{environment}/{hostname}.yml",
-    "cmdb/{environment}/default.yml",
-    "cmdb/{hostname}.yml",
-    "cmdb/default.yml",
-  ],
-};
-```
-
-Include all needed Rex modules. With **include** all the tasks inside these modules won't get displayed with *rex -T*.
 
 ```perl
 include qw/
@@ -144,19 +145,22 @@ include qw/
   /;
 ```
 
-The main task.  If you don't define the servers (or groups) in the task definition you can use the cli paramter *-G* or *-H*.
+Include all needed Rex modules. With **include** all the tasks inside these modules won't get displayed with *rex -T*.
+
 
 ```perl
 task setup => make {
 ```
 
-It is also possible to define the server or group to connect to.
+The main task.  If you don't define the servers (or groups) in the task definition you can use the cli paramter *-G* or *-H*.
+
 
 ```perl
 task "setup", group => "frontend",  make {
 ```
 
-Inside the task we just call the tasks from the modules we have included above. All tasks can be called as a normal perl function, as long as the taskname doesn't conflict with other perl functions.
+It is also possible to define the server or group to connect to.
+
 
 ```perl
   # run setup() task of Rex::OS::Base module
@@ -168,12 +172,15 @@ Inside the task we just call the tasks from the modules we have included above. 
 
 ```
 
-The last line of a Rexfile is normaly a true value. This is not always needed, but it is safer to include it.
+Inside the task we just call the tasks from the modules we have included above. All tasks can be called as a normal perl function, as long as the taskname doesn't conflict with other perl functions.
+
+
 
 ```perl
 # the last line of a Rexfile
 1;
 ```
+The last line of a Rexfile is normaly a true value. This is not always needed, but it is safer to include it.
 
 
 ## Test before ship
