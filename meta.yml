@@ -2,7 +2,7 @@ Name: Frontend Service
 Description: The frontend service
 Author: jan gehring <jan.gehring@gmail.com>
 License: Apache 2.0
-Requires:
+Require:
   Rex::NTP::Base:
     git: https://bitbucket.org/jfried/rex-ntp-base.git
     branch: master
