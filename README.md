@@ -42,15 +42,12 @@ Name: Frontend Service
 Description: The frontend service
 Author: jan gehring <jan.gehring@gmail.com>
 License: Apache 2.0
-Requires:
-  Rex::Ext::ParamLookup:
-    git: https://bitbucket.org/jfried/rex-ext-paramlookup.git
-    branch: master
+Require:
   Rex::NTP::Base:
-    git: https://bitbucket.org/jfried/rex-ntp-base.git
+    git: https://github.com/krimdomu/rex-ntp-base.git
     branch: master
   Rex::OS::Base:
-    git: https://bitbucket.org/jfried/rex-os-base.git
+    git: https://github.com/krimdomu/rex-os-base.git
     branch: master
 ```
 
@@ -261,7 +258,7 @@ You can now run the tests with ```rex Test:run```.
 Now, when you all have commit to your git repository you can use the *rexify* command to download them to (for example) a central deployment server.
 
 ```
-rexify --init=https://bitbucket.org/jfried/service-frontend.git
+rexify --init=https://github.com/krimdomu/service-frontend.git
 ```
 
 This will download everything into the folder *service-frontend*. The command also takes care of all dependencies and download them also into the *lib* folder.
