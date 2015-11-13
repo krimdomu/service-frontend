@@ -38,7 +38,7 @@ include qw/
 
 # create the default *setup* task.
 # this task just calls all the modules we want to use.
-task setup => make {
+task setup => sub {
 
   # run setup() task of Rex::OS::Base module
   Rex::OS::Base::setup();
